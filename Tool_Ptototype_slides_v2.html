@@ -7,15 +7,15 @@
     <title>eSims Sharp Radar - Oddin.gg Branded</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
 /* 1. THE SETUP */
 :root {
-    --oddin-green: #80B416;
-    --oddin-dark: #1E293B;
-    --oddin-slate: #475569;
-    --oddin-light: #F8FAF0;
+    --oddin-yellow: #FFCC00;
+    --oddin-black: #000000;
+    --text-muted: #4B5563;
+    --bg-off: #F9FAFB;
     --bg-white: #FFFFFF;
     --border-grey: #E2E8F0;
     --danger-red: #EF4444;
@@ -26,7 +26,7 @@
 * { box-sizing: border-box; }
 
 body {
-  background-color: #f1f5f9;
+  background-color: #D1D5DB;
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr;
@@ -43,11 +43,11 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   height: 720px;
   justify-content: center;
   overflow: hidden;
-  padding: 60px;
+  padding: 50px 80px 100px 80px;
   position: relative;
   width: 1280px;
 }
@@ -59,8 +59,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 6px;
-    background-color: var(--oddin-green);
+    height: 10px;
+    background-color: var(--oddin-yellow);
     z-index: 10;
 }
 
@@ -71,31 +71,31 @@ body {
 
 /* 2. TYPOGRAPHY */
 .slide-container h1, .slide-container h2, .slide-container h3 {
-  color: var(--oddin-dark);
+  color: var(--oddin-black);
   font-weight: 700;
-  font-family: 'Urbanist', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   margin: 0;
 }
 
 .slide-container .slide-title {
-  font-size: 44px;
+  font-size: 34px;
   font-weight: 700;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   text-align: left;
   width: 100%;
-  border-left: 8px solid var(--oddin-green);
-  padding-left: 20px;
+  border-bottom: 2px solid var(--oddin-yellow);
+  padding-bottom: 8px;
 }
 
 .slide-container p, .slide-container li {
-  color: var(--oddin-slate);
+  color: var(--text-muted);
   font-size: 20px;
   line-height: 1.5;
 }
 
 .subtitle {
   font-size: 24px;
-  color: var(--oddin-slate);
+  color: var(--text-muted);
   margin-top: 20px;
 }
 
@@ -117,14 +117,30 @@ body {
 
 .logo-box {
     position: absolute;
-    top: 40px;
-    right: 60px;
-    height: 40px;
+    bottom: 25px;
+    left: 60px;
+    background: var(--oddin-black);
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--oddin-yellow);
+    z-index: 10;
 }
 
 .logo-box img {
-    height: 100%;
+    height: 16px;
     object-fit: contain;
+}
+
+.slide-number {
+    position: absolute;
+    bottom: 30px;
+    right: 60px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--oddin-yellow);
+    z-index: 10;
 }
 
 /* WIREFRAME MOCKUP STYLES */
@@ -160,7 +176,7 @@ body {
     padding: 12px 15px;
     background: #F8FAFC;
     font-size: 14px;
-    color: var(--oddin-slate);
+    color: var(--text-muted);
     text-transform: uppercase;
     border-bottom: 1px solid var(--border-grey);
 }
@@ -205,11 +221,11 @@ body {
 }
 
 .table-layout th {
-  background: var(--oddin-light);
-  color: var(--oddin-dark);
+  background: var(--oddin-black);
+  color: #FFFFFF;
   padding: 15px;
   text-align: left;
-  border-bottom: 3px solid var(--oddin-green);
+  border-bottom: 3px solid var(--oddin-yellow);
 }
 
 .table-layout td {
@@ -235,7 +251,7 @@ body {
 
 .tile .icon {
   font-size: 40px;
-  color: var(--oddin-green);
+  color: var(--oddin-yellow);
   margin-bottom: 20px;
 }
 
@@ -244,7 +260,7 @@ body {
 /* HIGHLIGHTED NUMBERS */
 .highlight-numbers-layout .number {
     font-size: 120px;
-    color: var(--oddin-green);
+    color: var(--oddin-yellow);
     font-weight: 700;
 }
 
@@ -265,14 +281,14 @@ body {
 /* MODAL SIMULATION */
 .modal-sim {
     background: white;
-    border: 2px solid var(--oddin-green);
+    border: 2px solid var(--oddin-yellow);
     border-radius: 8px;
     padding: 20px;
     position: relative;
 }
 
 .engine-status {
-    background: var(--oddin-dark);
+    background: var(--oddin-black);
     color: white;
     padding: 10px;
     border-radius: 4px;
@@ -283,14 +299,12 @@ body {
 </head>
 <body>
 
-<div class="slide-container" id="slide1">
-    <div class="logo-box">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/13343753405151491216" alt="Oddin.gg Logo">
-    </div>
-    <div class="content-area" style="text-align: center;">
-        <h1 style="font-size: 80px;">eSims <span>Sharp Radar</span></h1>
-        <p class="subtitle">Dynamic Detection & Hybrid Risk Balancing Engine</p>
-        <p style="margin-top: 40px; font-weight: 600;">Q1 Strategy: From Passive Loss to Proactive Margin Protection</p>
+<div class="slide-container" id="slide1" style="background-color: #000000 !important;">
+    <div class="content-area" style="align-items: center; text-align: center;">
+        <img src="Resources/oddin_logo.svg" alt="Oddin.gg Logo" style="width: 280px; margin-bottom: 40px;">
+        <h1 style="font-size: 60px; color: white;">eSims Sharp Radar</h1>
+        <p style="font-size: 22px; color: #9CA3AF; margin-top: 20px;">Dynamic Detection & Hybrid Risk Balancing Engine</p>
+        <p style="font-size: 16px; color: #6B7280; margin-top: 40px; font-weight: 700;">Q1 Strategy: From Passive Loss to Proactive Margin Protection</p>
     </div>
 </div>
 
@@ -320,51 +334,10 @@ body {
 <div class="slide-container" id="slide3">
     <h2 class="slide-title">The Radar Command Center</h2>
     <div class="content-area">
-        <div class="wireframe-container">
-            <div class="wf-header">
-                <div style="font-weight: 700; color: var(--oddin-dark);">🎯 SHARP RADAR LIVE</div>
-                <div style="font-size: 12px; color: var(--oddin-slate);">Status: <span style="color: var(--success-green); font-weight: 700;">Engine Active (Hybrid)</span></div>
-            </div>
-            <table class="wf-table">
-                <thead>
-                    <tr>
-                        <th>Affected Pair</th>
-                        <th>Liability</th>
-                        <th>Imbalance</th>
-                        <th>Engine Status</th>
-                        <th>Primary Reason</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>⚽ Tekkz vs. Tom</strong></td>
-                        <td style="color: var(--danger-red); font-weight: 700;">-$12.4k</td>
-                        <td><div class="imbalance-bar"><div class="imbalance-fill" style="width: 95%;"></div></div></td>
-                        <td><span class="badge badge-danger">Auto-Crushing</span></td>
-                        <td><span class="badge badge-warning">⚡ Steam Chase</span></td>
-                        <td><button style="padding: 4px 8px; font-size: 10px; cursor: pointer;">INVESTIGATE</button></td>
-                    </tr>
-                    <tr>
-                        <td><strong>🏀 Mamba vs. ShooterX</strong></td>
-                        <td style="color: var(--danger-red); font-weight: 700;">-$4.2k</td>
-                        <td><div class="imbalance-bar"><div class="imbalance-fill" style="width: 70%;"></div></div></td>
-                        <td><span class="badge badge-warning">Adjusting</span></td>
-                        <td><span class="badge badge-warning">🎯 Max Limit Hit</span></td>
-                        <td><button style="padding: 4px 8px; font-size: 10px;">INVESTIGATE</button></td>
-                    </tr>
-                    <tr>
-                        <td><strong>⚽ CR7_Pro vs. MessiFan</strong></td>
-                        <td style="color: var(--oddin-slate);">-$1.1k</td>
-                        <td><div class="imbalance-bar"><div class="imbalance-fill" style="width: 30%;"></div></div></td>
-                        <td><span class="badge badge-success">Balanced</span></td>
-                        <td><span class="badge badge-success">🐝 Swarm (Low)</span></td>
-                        <td><button style="padding: 4px 8px; font-size: 10px;">INVESTIGATE</button></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div style="width: 85%; margin: 0 auto; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid var(--border-grey);">
+            <img src="Resources/eSims_Radar_Screenshot.png" alt="Sharp Radar Prototype" style="width: 100%; display: block;">
         </div>
-        <p style="font-size: 14px; margin-top: 15px; color: var(--oddin-slate); text-align: center;">Traders gain immediate visibility into Toxicity-Weighted adjustments vs Market Reality.</p>
+        <p style="font-size: 14px; margin-top: 15px; color: var(--text-muted); text-align: center;">Traders gain immediate visibility into Toxicity-Weighted adjustments vs Market Reality.</p>
     </div>
 </div>
 
@@ -382,7 +355,7 @@ body {
                 </ul>
             </div>
             <div class="image-wrapper">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/3518151459351190687" alt="Professional data dashboard UI">
+                <img src="Resources/investigation_view.png" alt="Professional data dashboard UI">
             </div>
         </div>
     </div>
@@ -412,7 +385,7 @@ body {
                 <div style="background: #F8FAFC; padding: 15px; border-radius: 8px;">
                     <h3 style="font-size: 18px; margin-bottom: 10px;">STUDIO ACTION</h3>
                     <p style="font-size: 14px;">Broken Matchup Detected: Tom is on Hour 5 of shift. Performance dropping.</p>
-                    <button style="width: 100%; background: var(--oddin-green); color: white; border: none; padding: 10px; font-weight: 700; margin-top: 10px; cursor: pointer;">SEND ROTATION REQUEST</button>
+                    <button style="width: 100%; background: var(--oddin-yellow); color: white; border: none; padding: 10px; font-weight: 700; margin-top: 10px; cursor: pointer;">SEND ROTATION REQUEST</button>
                 </div>
             </div>
         </div>
@@ -440,9 +413,12 @@ body {
     <div class="content-area">
         <div class="two-column">
             <div>
-                <div class="image-wrapper">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/17648542975993718392" alt="eFootball player in studio">
-                </div>
+                <div style="background: var(--bg-off); border: 1px solid var(--border-grey); border-radius: 12px; height: 350px; display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; color: var(--text-muted);">
+                    <i class="fa-solid fa-gamepad" style="font-size: 48px; color: var(--oddin-yellow); margin-bottom: 15px;"></i>
+                <p style="font-size: 16px; font-weight: 600;">eSims Studio Environment</p>
+    </div>
+</div>
             </div>
             <div>
                 <h3>Beyond Pricing: Product Health</h3>
@@ -464,19 +440,19 @@ body {
             <div style="margin-bottom: 30px;">
                 <p style="font-weight: 700; margin-bottom: 5px;">Manual Trading Adjustment</p>
                 <div style="height: 40px; background: #E2E8F0; border-radius: 8px; width: 100%;">
-                    <div style="width: 85%; height: 100%; background: var(--oddin-slate); border-radius: 8px; display: flex; align-items: center; padding-left: 20px; color: white; font-weight: 700;">45 Seconds</div>
+                    <div style="width: 85%; height: 100%; background: var(--text-muted); border-radius: 8px; display: flex; align-items: center; padding-left: 20px; color: white; font-weight: 700;">45 Seconds</div>
                 </div>
             </div>
             <div style="margin-bottom: 30px;">
                 <p style="font-weight: 700; margin-bottom: 5px;">Traditional Auto-Trading</p>
                 <div style="height: 40px; background: #E2E8F0; border-radius: 8px; width: 100%;">
-                    <div style="width: 40%; height: 100%; background: var(--oddin-slate); border-radius: 8px; display: flex; align-items: center; padding-left: 20px; color: white; font-weight: 700;">12 Seconds</div>
+                    <div style="width: 40%; height: 100%; background: var(--text-muted); border-radius: 8px; display: flex; align-items: center; padding-left: 20px; color: white; font-weight: 700;">12 Seconds</div>
                 </div>
             </div>
             <div>
                 <p style="font-weight: 700; margin-bottom: 5px;">Oddin.gg Hybrid Engine</p>
                 <div style="height: 40px; background: #E2E8F0; border-radius: 8px; width: 100%;">
-                    <div style="width: 5%; height: 100%; background: var(--oddin-green); border-radius: 8px; display: flex; align-items: center; padding-left: 10px; color: white; font-weight: 700; min-width: 50px;">0.5s</div>
+                    <div style="width: 5%; height: 100%; background: var(--oddin-yellow); border-radius: 8px; display: flex; align-items: center; padding-left: 10px; color: white; font-weight: 700; min-width: 50px;">0.5s</div>
                 </div>
             </div>
         </div>
@@ -527,9 +503,12 @@ body {
     <div class="content-area">
         <div class="two-column">
             <div>
-                <div class="image-wrapper">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/17714299547938725470" alt="eBasketball gaming arena">
+                <div style="background: var(--bg-off); border: 1px solid var(--border-grey); border-radius: 12px; height: 350px; display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; color: var(--text-muted);">
+                    <i class="fa-solid fa-basketball" style="font-size: 48px; color: var(--oddin-yellow); margin-bottom: 15px;"></i>
+                    <p style="font-size: 16px; font-weight: 600;">eBasketball Studio</p>
                 </div>
+</div>
             </div>
             <div>
                 <h3>Extending to Court Action</h3>
@@ -550,17 +529,17 @@ body {
         <div style="display: flex; justify-content: space-between; position: relative; margin-top: 40px;">
             <div style="position: absolute; top: 40px; left: 0; right: 0; height: 2px; background: var(--border-grey); z-index: 0;"></div>
             <div style="width: 22%; text-align: center; position: relative; z-index: 1;">
-                <div style="width: 20px; height: 20px; background: var(--oddin-green); border-radius: 50%; margin: 30px auto;"></div>
+                <div style="width: 20px; height: 20px; background: var(--oddin-yellow); border-radius: 50%; margin: 30px auto;"></div>
                 <h3 style="font-size: 18px;">WEEK 1-2</h3>
                 <p style="font-size: 14px;">Deploy Hybrid Exchange logic for eFootball.</p>
             </div>
             <div style="width: 22%; text-align: center; position: relative; z-index: 1;">
-                <div style="width: 20px; height: 20px; background: var(--oddin-green); border-radius: 50%; margin: 30px auto;"></div>
+                <div style="width: 20px; height: 20px; background: var(--oddin-yellow); border-radius: 50%; margin: 30px auto;"></div>
                 <h3 style="font-size: 18px;">WEEK 4</h3>
                 <p style="font-size: 14px;">Launch Radar Dashboard Light Theme for Traders.</p>
             </div>
             <div style="width: 22%; text-align: center; position: relative; z-index: 1;">
-                <div style="width: 20px; height: 20px; background: var(--border-grey); border: 3px solid var(--oddin-green); border-radius: 50%; margin: 30px auto;"></div>
+                <div style="width: 20px; height: 20px; background: var(--border-grey); border: 3px solid var(--oddin-yellow); border-radius: 50%; margin: 30px auto;"></div>
                 <h3 style="font-size: 18px;">WEEK 8</h3>
                 <p style="font-size: 14px;">Studio API Integration for Auto-Rotations.</p>
             </div>
@@ -573,19 +552,33 @@ body {
     </div>
 </div>
 
-<div class="slide-container" id="slide12">
-    <div class="logo-box">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/13343753405151491216" alt="Oddin.gg Logo">
-    </div>
-    <div class="content-area" style="text-align: center;">
-        <h1 style="font-size: 60px;">Final Review <span>&</span> Approval</h1>
-        <p class="subtitle">Next Steps: Integration of Radar API with Trading Backend</p>
-        <div style="margin-top: 60px; font-size: 18px; color: var(--oddin-slate);">
+<div class="slide-container" id="slide12" style="background-color: #000000 !important;">
+    <div class="content-area" style="align-items: center; text-align: center;">
+        <img src="Resources/oddin_logo.svg" alt="Oddin.gg Logo" style="width: 200px; margin-bottom: 40px;">
+        <h1 style="font-size: 60px; color: white;">Final Review & Approval</h1>
+        <p style="font-size: 22px; color: #9CA3AF; margin-top: 20px;">Next Steps: Integration of Radar API with Trading Backend</p>
+        <div style="margin-top: 60px; font-size: 18px; color: #6B7280;">
             oddin.gg | integrity. performance. margin.
         </div>
     </div>
 </div>
 
+<script>
+document.querySelectorAll('.slide-container').forEach((slide, i) => {
+    const total = document.querySelectorAll('.slide-container').length;
+    const isDark = slide.style.backgroundColor === 'rgb(0, 0, 0)';
+    if (!isDark) {
+        const logo = document.createElement('div');
+        logo.className = 'logo-box';
+        logo.innerHTML = '<img src="Resources/oddin-logo.svg" alt="Oddin">';
+        slide.appendChild(logo);
+    }
+    const num = document.createElement('div');
+    num.className = 'slide-number';
+    num.textContent = (i + 1) + ' / ' + total;
+    slide.appendChild(num);
+});
+</script>
 </body>
 </html>
 

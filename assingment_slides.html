@@ -176,7 +176,7 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
 .timeline-container { width: 100%; position: relative; padding-top: 10px; }
 .timeline-line { 
     position: absolute; 
-    top: 70px; /* ALIGNED WITH DOTS */
+    top: 94px; /* ALIGNED WITH DOTS */
     left: 5%; 
     width: 90%; 
     height: 4px; 
@@ -216,26 +216,29 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
 .title-slide .content-area { align-items: center; text-align: center; }
 .title-slide .slide-title { border: none; font-size: 64px; text-align: center; color: white; margin-bottom: 10px; }
 .title-slide p.subtitle { font-size: 22px; color: #9CA3AF; text-align: center; }
+.slide-subtitle { font-size: 18px; color: var(--text-muted); font-weight: 500; margin-top: -22px; margin-bottom: 25px; text-align: left; width: 100%; }
 
     </style>
 </head>
 <body>
 
+<!-- SLIDE 1: Title -->
 <div class="slide-container title-slide">
     <div class="content-area">
-        <img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin Logo" style="width: 280px; margin-bottom: 40px;">
+        <img src="Resources/oddin_logo.svg" alt="Oddin Logo" style="width: 280px; margin-bottom: 40px;">
         <h2 style="letter-spacing: 5px; text-transform: uppercase; color: var(--oddin-yellow); font-size: 18px; margin-bottom: 10px;">eSims Strategic Review</h2>
         <h1 class="slide-title">Improving Model Quality</h1>
         <p class="subtitle">Diagnosis, Prioritization, and Algorithmic Triage</p>
     </div>
-    <div class="slide-number">1 / 13</div>
 </div>
 
+<!-- SLIDE 2: 1. Diagnosis — Framing -->
 <div class="slide-container">
-    <h2 class="slide-title">1. Diagnosis: Framing the Problem</h2>
+    <h2 class="slide-title">1. Diagnosis</h2>
+    <p class="slide-subtitle">Framing the Problem</p>
     <div class="content-area">
         <div class="card accent">
-            <h3>Technical Debt & Model Staleness</h3>
+            <h3>Technical Debt &amp; Model Staleness</h3>
             <p>I frame this as a <strong>Technical Debt and Model Staleness crisis</strong>. We are currently leaking margin through two systemic avenues that must be resolved collaboratively:</p>
             <div class="two-column" style="margin-top: 20px;">
                 <div>
@@ -249,147 +252,95 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
             </div>
         </div>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">2 / 13</div>
 </div>
 
+<!-- SLIDE 3: 1. Diagnosis — Day One Data Requests -->
 <div class="slide-container">
-    <h2 class="slide-title">1. How I Lead the Math Team Partnership</h2>
+    <h2 class="slide-title">1. Diagnosis</h2>
+    <p class="slide-subtitle">Day One Collaborative Request</p>
     <div class="content-area">
-        <div class="card accent" style="margin-bottom: 20px; padding: 18px 25px;">
-            <p style="font-size: 18px; margin: 0;"><strong>My operating principle:</strong> I explain the <em>why</em> and <em>what we want to achieve</em>. I give the team clarity on the goal and full freedom to evaluate the best technical options. But always time-framed — to avoid derailing or analysis paralysis — and always evaluated: what was achieved, what's next.</p>
-        </div>
-        <div class="two-column" style="gap: 30px;">
-            <div class="card" style="border-top: 4px solid var(--oddin-yellow);">
-                <h3 style="font-size: 20px; margin-bottom: 12px;">What I Bring to the Table</h3>
-                <ul style="font-size: 16px; padding-left: 20px; margin: 0;">
-                    <li style="margin-bottom: 10px;"><strong>The business problem and the outcome:</strong> "eBB margin needs to reach within 1pp of its 6% target" — not "fix the correlation coefficient."</li>
-                    <li style="margin-bottom: 10px;"><strong>The constraints:</strong> time, capacity, dependencies. I make the boundaries visible so the team can optimise within them.</li>
-                    <li><strong>The evaluation cadence:</strong> 2-week sprint reviews. Every cycle ends with a decision — continue, pivot, or escalate — never just a status update.</li>
-                </ul>
+        <p style="margin-bottom: 30px;">Before any modeling begins, I would initiate a cross-functional deep dive with Data, Analytics, and Trading to request:</p>
+        <div class="three-column">
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-chart-pie"></i></div>
+                <h3>Margin Decomposition</h3>
+                <p style="font-size: 17px;">Granular P&L breakdown by title, specific market, and bet-type (e.g., Pre-match vs. Live).</p>
             </div>
-            <div class="card" style="border-top: 4px solid var(--oddin-yellow);">
-                <h3 style="font-size: 20px; margin-bottom: 12px;">What I Protect Them From</h3>
-                <ul style="font-size: 16px; padding-left: 20px; margin: 0;">
-                    <li style="margin-bottom: 10px;"><strong>Scope creep from commercial:</strong> no "whipsaw" priorities. The roadmap is the shield.</li>
-                    <li style="margin-bottom: 10px;"><strong>Analysis paralysis:</strong> if a sprint produces no measurable gain, we pivot to Trading-led mitigation. No shame — it's data.</li>
-                    <li><strong>Working in isolation:</strong> daily partnership with the Eng Lead to unblock infrastructure constraints immediately. I'm in the room, not waiting for a Jira ticket.</li>
-                </ul>
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-users-viewfinder"></i></div>
+                <h3>P&L Concentration</h3>
+                <p style="font-size: 17px;">Player-pair P&L concentration analysis — is the financial bleed driven by targeted sharps or broad swarms?</p>
             </div>
-        </div>
-        <div style="margin-top: 15px; background: var(--oddin-black); color: white; padding: 12px 20px; border-radius: 6px; text-align: center; font-size: 15px;">
-            <strong style="color: var(--oddin-yellow);">Sprint 1 asks:</strong>&nbsp; Margin decomposition by title/market/bet-type&nbsp; •&nbsp; P&L concentration (sharps vs. broad)&nbsp; •&nbsp; Top 10 correlation residuals
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-link-slash"></i></div>
+                <h3>Correlation Residuals</h3>
+                <p style="font-size: 17px;">Statistical analysis of correlation residuals on the top 10 market pairs to isolate DDA impact.</p>
+            </div>
         </div>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">3 / 13</div>
 </div>
 
+<!-- SLIDE 4: 1. Diagnosis — Hybrid Engine -->
 <div class="slide-container">
-    <h2 class="slide-title">Q1 Triage: Hybrid Exchange Engine</h2>
+    <h2 class="slide-title">1. Diagnosis</h2>
+    <p class="slide-subtitle">Q1 Triage: Hybrid Exchange Engine</p>
     <div class="content-area" style="justify-content: flex-start; padding-top: 10px;">
         <p style="margin-bottom: 20px;">A temporary algorithmic shield to front-run market corrections by weighting volume based on bettor classification:</p>
         <div class="weight-grid">
-            <div class="weight-card">
-                <p style="font-size: 16px;">Recreational</p>
-                <div class="factor">1x</div>
-                <p style="font-size: 13px; color: var(--text-muted);">Neutral Weight</p>
-            </div>
-            <div class="weight-card">
-                <p style="font-size: 16px;">New / Unverified</p>
-                <div class="factor">2x</div>
-                <p style="font-size: 13px; color: var(--text-muted);">Caution Weight</p>
-            </div>
-            <div class="weight-card highlight">
-                <p style="font-size: 16px; color: #FFFFFF;"><strong>Sharp / Toxic</strong></p>
-                <div class="factor">10x</div>
-                <p style="font-size: 13px; font-weight: bold; color: #D1D5DB;">Crash-Line Weight</p>
-            </div>
+            <div class="weight-card"><p style="font-size: 16px;">Recreational</p><div class="factor">1x</div><p style="font-size: 13px; color: var(--text-muted);">Neutral Weight</p></div>
+            <div class="weight-card"><p style="font-size: 16px;">New / Unverified</p><div class="factor">2x</div><p style="font-size: 13px; color: var(--text-muted);">Caution Weight</p></div>
+            <div class="weight-card highlight"><p style="font-size: 16px; color: #FFFFFF;"><strong>Sharp / Toxic</strong></p><div class="factor">10x</div><p style="font-size: 13px; font-weight: bold; color: #D1D5DB;">Crash-Line Weight</p></div>
         </div>
         <div class="card accent" style="margin-top: 20px; padding: 20px;">
             <p style="font-size: 17px;"><strong>Strategic Impact:</strong> Adjusts odds based on liability <em>before</em> the sharp bet can extract maximum value. Works as an immediate band-aid for both correlation and pairing gaps.</p>
         </div>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">4 / 13</div>
 </div>
 
+<!-- SLIDE 5: 1. Diagnosis — Sharp Radar -->
 <div class="slide-container">
-    <h2 class="slide-title">MVP: Sharp Radar & Studio Notify</h2>
-    <div class="content-area">
-        <div class="two-column">
-            <div>
-                <h3>PM-Built Triage Layer</h3>
-                <p style="font-size: 18px;">I will <strong>vibe-code</strong> this tool to detect imbalances instantly without diverting Math capacity.</p>
-                <ul style="margin-top: 15px; padding-left: 20px; font-size: 17px;">
-                    <li><strong>Real-time detection</strong> of pairing biases.</li>
-                    <li><strong>Direct Studio Link:</strong> Auto-triggers rotation requests for fatigued players.</li>
-                    <li><strong>Trading Insight:</strong> Immediate visualization of toxicity swarms.</li>
-                </ul>
-            </div>
-            <div class="radar-ui">
-                <div style="border-bottom: 1px solid #334155; padding-bottom: 8px; margin-bottom: 10px; display:flex; justify-content: space-between;">
-                    <span>// RADAR_LIVE</span> <span style="color:#22C55E">SCANNING...</span>
-                </div>
-                <div class="radar-row" style="color:#94A3B8; font-size: 11px;">
-                    <span>TITLE</span> <span>PAIRING</span> <span>INDEX</span> <span>ACTION</span>
-                </div>
-                <div class="radar-row">
-                    <span>EBASKET</span> <span>P1 v P2</span> <span style="color:var(--oddin-yellow)">9.4</span> <span style="color:#EF4444">NOTIFY_STUDIO</span>
-                </div>
-                <div class="radar-row">
-                    <span>EFOOT</span> <span>G1 v G2</span> <span>1.2</span> <span>NONE</span>
-                </div>
-                <div class="radar-row">
-                    <span>EBASKET</span> <span>P3 v P4</span> <span style="color:var(--oddin-yellow)">7.8</span> <span style="color:#EF4444">LIMIT_MAX</span>
-                </div>
-                <div style="margin-top: 12px; font-size: 10px; color:#64748B;">> DETECTION_PRECISION: 94%</div>
-            </div>
+    <h2 class="slide-title">1. Diagnosis</h2>
+    <p class="slide-subtitle">MVP: Sharp Radar &amp; Studio Notify</p>
+    <div class="content-area" style="flex-direction: row; gap: 30px; align-items: center;">
+        <div style="width: 42%;">
+            <h3 style="margin-bottom: 15px;">PM-Built Triage Layer</h3>
+            <p style="font-size: 17px;">I prototyped this tool with <strong>Gemini Code</strong> to detect imbalances instantly without diverting Math capacity.</p>
+            <ul style="margin-top: 15px; font-size: 16px;">
+                <li style="margin-bottom: 8px;"><strong>Real-time detection</strong> of pairing biases.</li>
+                <li style="margin-bottom: 8px;"><strong>Live Behavioral Feed:</strong> steam chases, swarm detection, max-limit snipes.</li>
+                <li style="margin-bottom: 8px;"><strong>Direct Studio Link:</strong> auto-triggers rotation for fatigued players.</li>
+                <li><strong>Trading Insight:</strong> imbalance index (1-10) with engine status per pair.</li>
+            </ul>
+        </div>
+        <div style="width: 58%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border: 1px solid var(--border);">
+            <img src="Resources/eSims_Radar_Screenshot.png" alt="Sharp Radar Prototype" style="width: 100%; display: block;">
         </div>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">5 / 13</div>
 </div>
 
+<!-- SLIDE 6: 1. Diagnosis — Reaction Time -->
 <div class="slide-container">
-    <h2 class="slide-title">Why P0: Reaction Time Kills Latency Arbitrage</h2>
+    <h2 class="slide-title">1. Diagnosis</h2>
+    <p class="slide-subtitle">Why P0: Reaction Time Kills Latency Arbitrage</p>
     <div class="content-area" style="justify-content: center;">
         <div style="width: 100%; margin-top: 10px;">
-            <div style="margin-bottom: 30px;">
-                <p style="font-weight: 700; margin-bottom: 8px; font-size: 18px;">Manual Trading Adjustment</p>
-                <div style="height: 44px; background: #F3F4F6; border-radius: 8px; width: 100%;">
-                    <div style="width: 85%; height: 100%; background: var(--oddin-black); border-radius: 8px; display: flex; align-items: center; padding-left: 20px; color: white; font-weight: 700; font-size: 18px;">45 Seconds</div>
-                </div>
-            </div>
-            <div style="margin-bottom: 30px;">
-                <p style="font-weight: 700; margin-bottom: 8px; font-size: 18px;">Traditional Auto-Trading</p>
-                <div style="height: 44px; background: #F3F4F6; border-radius: 8px; width: 100%;">
-                    <div style="width: 40%; height: 100%; background: var(--oddin-black); border-radius: 8px; display: flex; align-items: center; padding-left: 20px; color: white; font-weight: 700; font-size: 18px;">12 Seconds</div>
-                </div>
-            </div>
-            <div style="margin-bottom: 25px;">
-                <p style="font-weight: 700; margin-bottom: 8px; font-size: 18px;">Oddin Hybrid Engine <span style="color: var(--oddin-yellow);">(PM-Built)</span></p>
-                <div style="height: 44px; background: #F3F4F6; border-radius: 8px; width: 100%;">
-                    <div style="width: 5%; min-width: 80px; height: 100%; background: var(--oddin-yellow); border-radius: 8px; display: flex; align-items: center; padding-left: 15px; color: var(--oddin-black); font-weight: 700; font-size: 18px;">0.5s</div>
-                </div>
-            </div>
+            <div style="margin-bottom: 30px;"><p style="font-weight: 700; margin-bottom: 8px; font-size: 18px;">Manual Trading Adjustment</p><div style="height: 44px; background: #F3F4F6; border-radius: 8px; width: 100%;"><div style="width: 85%; height: 100%; background: var(--oddin-black); border-radius: 8px; display: flex; align-items: center; padding-left: 20px; color: white; font-weight: 700; font-size: 18px;">45 Seconds</div></div></div>
+            <div style="margin-bottom: 30px;"><p style="font-weight: 700; margin-bottom: 8px; font-size: 18px;">Traditional Auto-Trading</p><div style="height: 44px; background: #F3F4F6; border-radius: 8px; width: 100%;"><div style="width: 40%; height: 100%; background: var(--oddin-black); border-radius: 8px; display: flex; align-items: center; padding-left: 20px; color: white; font-weight: 700; font-size: 18px;">12 Seconds</div></div></div>
+            <div style="margin-bottom: 25px;"><p style="font-weight: 700; margin-bottom: 8px; font-size: 18px;">Oddin Hybrid Engine <span style="color: var(--oddin-yellow);">(PM-Built)</span></p><div style="height: 44px; background: #F3F4F6; border-radius: 8px; width: 100%;"><div style="width: 5%; min-width: 80px; height: 100%; background: var(--oddin-yellow); border-radius: 8px; display: flex; align-items: center; padding-left: 15px; color: var(--oddin-black); font-weight: 700; font-size: 18px;">0.5s</div></div></div>
         </div>
         <div class="card accent" style="padding: 15px 25px; margin-top: 5px;">
             <p style="font-size: 17px; margin: 0;"><strong>The 0.5s reaction kills the latency arbitrage sharps rely on.</strong> This is why the Hybrid Engine is P0 — it protects capital instantly, without consuming a single Math team week.</p>
         </div>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">6 / 13</div>
 </div>
 
+<!-- SLIDE 7: 2. Prioritisation — Framework -->
 <div class="slide-container">
-    <h2 class="slide-title">2. Prioritization Framework</h2>
+    <h2 class="slide-title">2. Prioritisation</h2>
+    <p class="slide-subtitle">ICE + Cost of Delay (CoD) Framework</p>
     <div class="content-area">
         <div class="two-column">
-            <div class="card accent">
-                <h3>ICE + Cost of Delay (CoD)</h3>
-                <p>In backend algorithmic models, "Reach" is secondary to <strong>Capital Integrity</strong>. We prioritize based on financial risk of inaction.</p>
-            </div>
+            <div class="card accent"><h3>ICE + Cost of Delay (CoD)</h3><p>In backend algorithmic models, "Reach" is secondary to <strong>Capital Integrity</strong>. We prioritize based on financial risk of inaction.</p></div>
             <div class="card">
                 <ul style="list-style: none; padding: 0; font-size: 17px;">
                     <li style="margin-bottom: 12px;"><i class="fa-solid fa-chart-line" style="color:var(--oddin-yellow); margin-right: 10px;"></i> <strong>Impact:</strong> Expected margin recovery.</li>
@@ -400,76 +351,42 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
             </div>
         </div>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">7 / 13</div>
 </div>
 
+<!-- SLIDE 8: 2. Prioritisation — Matrix -->
 <div class="slide-container">
-    <h2 class="slide-title">2. Strategic Priority Matrix</h2>
+    <h2 class="slide-title">2. Prioritisation</h2>
+    <p class="slide-subtitle">Strategic Priority Matrix</p>
     <div class="content-area">
         <table>
-            <thead>
-                <tr>
-                    <th>Initiative</th>
-                    <th>Impact</th>
-                    <th>Effort</th>
-                    <th>Cost of Delay (Bleed)</th>
-                    <th>Priority</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Initiative</th><th>Impact</th><th>Effort</th><th>Cost of Delay (Bleed)</th><th>Priority</th></tr></thead>
             <tbody>
-                <tr>
-                    <td><strong>Hybrid Engine + Radar (PM Built)</strong></td>
-                    <td>High</td>
-                    <td>Zero (Math)</td>
-                    <td style="color:#EF4444; font-weight:700;">Critical</td>
-                    <td><span class="badge">P0 - Immediate</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Correlation Gaps (eFootball)</strong></td>
-                    <td>Critical</td>
-                    <td>High (8w)</td>
-                    <td style="font-weight:700;">High (Flagship)</td>
-                    <td><strong>P1 - Strategic</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>Pairing Model Fix (Portfolio)</strong></td>
-                    <td>Medium</td>
-                    <td>High (6w)</td>
-                    <td>Low (Mitigated)</td>
-                    <td><strong>P2 - Optimization</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>eHockey MVP Vertical</strong></td>
-                    <td>Expansion</td>
-                    <td>Med (4w)</td>
-                    <td>Low (Growth)</td>
-                    <td><strong>P3 - Expansion</strong></td>
-                </tr>
+                <tr><td><strong>Hybrid Engine + Radar (PM Built)</strong></td><td>High</td><td>Zero (Math)</td><td style="color:#EF4444; font-weight:700;">Critical</td><td><span class="badge">P0 - Immediate</span></td></tr>
+                <tr><td><strong>Correlation Gaps (eFootball)</strong></td><td>Critical</td><td>High (8w)</td><td style="font-weight:700;">High (Flagship)</td><td><strong>P1 - Strategic</strong></td></tr>
+                <tr><td><strong>Pairing Model Fix (Portfolio)</strong></td><td>Medium</td><td>High (6w)</td><td>Low (Mitigated)</td><td><strong>P2 - Optimization</strong></td></tr>
+                <tr><td><strong>eHockey MVP Vertical</strong></td><td>Expansion</td><td>Med (4w)</td><td>Low (Growth)</td><td><strong>P3 - Expansion</strong></td></tr>
             </tbody>
         </table>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">8 / 13</div>
 </div>
 
+<!-- SLIDE 9: 3. Working with Mathematicians -->
 <div class="slide-container">
-    <h2 class="slide-title">1. How I Lead the Math Team Partnership</h2>
+    <h2 class="slide-title">3. Working with Mathematicians</h2>
+    <p class="slide-subtitle">How I Lead the Math Team Partnership</p>
     <div class="content-area">
         <div class="card accent" style="margin-bottom: 20px; padding: 18px 25px;">
             <p style="font-size: 18px; margin: 0;"><strong>My operating principle:</strong> I explain the <em>why</em> and <em>what we want to achieve</em>. I give the team clarity on the goal and full freedom to evaluate the best technical options. But always time-framed — to avoid derailing or analysis paralysis — and always evaluated: what was achieved, what's next.</p>
         </div>
         <div class="two-column" style="gap: 30px;">
-            <div class="card" style="border-top: 4px solid var(--oddin-yellow);">
-                <h3 style="font-size: 20px; margin-bottom: 12px;">What I Bring to the Table</h3>
+            <div class="card" style="border-top: 4px solid var(--oddin-yellow);"><h3 style="font-size: 20px; margin-bottom: 12px;">What I Bring to the Table</h3>
                 <ul style="font-size: 16px; padding-left: 20px; margin: 0;">
                     <li style="margin-bottom: 10px;"><strong>The business problem and the outcome:</strong> "eBB margin needs to reach within 1pp of its 6% target" — not "fix the correlation coefficient."</li>
                     <li style="margin-bottom: 10px;"><strong>The constraints:</strong> time, capacity, dependencies. I make the boundaries visible so the team can optimise within them.</li>
                     <li><strong>The evaluation cadence:</strong> 2-week sprint reviews. Every cycle ends with a decision — continue, pivot, or escalate — never just a status update.</li>
                 </ul>
             </div>
-            <div class="card" style="border-top: 4px solid var(--oddin-yellow);">
-                <h3 style="font-size: 20px; margin-bottom: 12px;">What I Protect Them From</h3>
+            <div class="card" style="border-top: 4px solid var(--oddin-yellow);"><h3 style="font-size: 20px; margin-bottom: 12px;">What I Protect Them From</h3>
                 <ul style="font-size: 16px; padding-left: 20px; margin: 0;">
                     <li style="margin-bottom: 10px;"><strong>Scope creep from commercial:</strong> no "whipsaw" priorities. The roadmap is the shield.</li>
                     <li style="margin-bottom: 10px;"><strong>Analysis paralysis:</strong> if a sprint produces no measurable gain, we pivot to Trading-led mitigation. No shame — it's data.</li>
@@ -478,148 +395,101 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
             </div>
         </div>
         <div style="margin-top: 15px; background: var(--oddin-black); color: white; padding: 12px 20px; border-radius: 6px; text-align: center; font-size: 15px;">
-            <strong style="color: var(--oddin-yellow);">Sprint 1 asks:</strong>&nbsp; Margin decomposition by title/market/bet-type&nbsp; •&nbsp; P&L concentration (sharps vs. broad)&nbsp; •&nbsp; Top 10 correlation residuals
+            <strong style="color: var(--oddin-yellow);">Sprint 1 asks:</strong>&nbsp; Margin decomposition by title/market/bet-type&nbsp; •&nbsp; P&amp;L concentration (sharps vs. broad)&nbsp; •&nbsp; Top 10 correlation residuals
         </div>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">3 / 13</div>
 </div>
 
+<!-- SLIDE 10: 4. Deepen vs. Expand -->
 <div class="slide-container">
-    <h2 class="slide-title">4. Deepen vs. Expand: Stakeholder Alignment</h2>
+    <h2 class="slide-title">4. Deepen vs. Expand</h2>
+    <p class="slide-subtitle">Stakeholder Alignment</p>
     <div class="content-area">
-        <div class="card accent" style="margin-bottom: 25px; padding: 20px;">
-            <h3 style="margin-bottom: 10px;">Framing: Conditional, not Sequential</h3>
-            <p>I align stakeholders by ensuring every team wins through a structured roadmap, rather than issuing a flat "no" to expansion.</p>
-        </div>
+        <div class="card accent" style="margin-bottom: 25px; padding: 20px;"><h3 style="margin-bottom: 10px;">Framing: Conditional, not Sequential</h3><p>I align stakeholders by ensuring every team wins through a structured roadmap, rather than issuing a flat "no" to expansion.</p></div>
         <div class="three-column">
-            <div class="card">
-                <h4 style="border-bottom: 2px solid var(--oddin-yellow); padding-bottom: 5px;">Commercial</h4>
-                <p style="font-size: 16px; margin-top: 10px;">Gets a <strong>"When"</strong>, not a <strong>"No"</strong>. Launches are tied directly to objective margin recovery gates.</p>
-            </div>
-            <div class="card">
-                <h4 style="border-bottom: 2px solid var(--oddin-yellow); padding-bottom: 5px;">Trading</h4>
-                <p style="font-size: 16px; margin-top: 10px;">Gets a <strong>Measurable Gate</strong> they control (Radar Index) before accepting new title volume.</p>
-            </div>
-            <div class="card">
-                <h4 style="border-bottom: 2px solid var(--oddin-yellow); padding-bottom: 5px;">Math Team</h4>
-                <p style="font-size: 16px; margin-top: 10px;">Gets <strong>Focused Work</strong>. Complete protection from commercial "whipsaw" priorities and academic paralysis.</p>
-            </div>
+            <div class="card"><h4 style="border-bottom: 2px solid var(--oddin-yellow); padding-bottom: 5px;">Commercial</h4><p style="font-size: 16px; margin-top: 10px;">Gets a <strong>"When"</strong>, not a <strong>"No"</strong>. Launches are tied directly to objective margin recovery gates.</p></div>
+            <div class="card"><h4 style="border-bottom: 2px solid var(--oddin-yellow); padding-bottom: 5px;">Trading</h4><p style="font-size: 16px; margin-top: 10px;">Gets a <strong>Measurable Gate</strong> they control (Radar Index) before accepting new title volume.</p></div>
+            <div class="card"><h4 style="border-bottom: 2px solid var(--oddin-yellow); padding-bottom: 5px;">Math Team</h4><p style="font-size: 16px; margin-top: 10px;">Gets <strong>Focused Work</strong>. Complete protection from commercial "whipsaw" priorities and academic paralysis.</p></div>
         </div>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">10 / 13</div>
 </div>
 
+<!-- SLIDE 11: 5. Roadmap — Timeline -->
 <div class="slide-container">
-    <h2 class="slide-title">5. Phased Roadmap (Q1-Q3)</h2>
+    <h2 class="slide-title">5. Roadmap</h2>
+    <p class="slide-subtitle">Phased Roadmap (Q1-Q3)</p>
     <div class="content-area">
-        <div class="timeline-container">
-            <div class="timeline-line"></div>
+        <div class="timeline-container"><div class="timeline-line"></div>
             <div class="timeline-row">
-                <div class="timeline-item">
-                    <h3 style="font-size: 20px;">Q1: Triage</h3>
-                    <div class="timeline-dot"></div>
-                    <p style="font-size: 15px;">• Hybrid Engine Live<br>• Launch Radar (PM)<br>• Fix eFootball DDA</p>
-                </div>
-                <div class="timeline-item">
-                    <h3 style="font-size: 20px;">Q2: Deepen</h3>
-                    <div class="timeline-dot"></div>
-                    <p style="font-size: 15px;">• Portfolio Pair Math Fix<br>• eBasketball DDA Fix<br>• Build eHockey Engine</p>
-                </div>
-                <div class="timeline-item">
-                    <h3 style="font-size: 20px;">Q3: Expand</h3>
-                    <div class="timeline-dot"></div>
-                    <p style="font-size: 15px;">• <strong>eHockey Beta Launch</strong><br>• Gaps for eCricket<br>• Audit Portfolio Health</p>
-                </div>
+                <div class="timeline-item"><h3 style="font-size: 20px;">Q1: Triage</h3><div class="timeline-dot"></div><p style="font-size: 15px;">• Hybrid Engine Live<br>• Launch Radar (PM)<br>• Fix eFootball DDA</p></div>
+                <div class="timeline-item"><h3 style="font-size: 20px;">Q2: Deepen</h3><div class="timeline-dot"></div><p style="font-size: 15px;">• Portfolio Pair Math Fix<br>• eBasketball DDA Fix<br>• Build eHockey Engine</p></div>
+                <div class="timeline-item"><h3 style="font-size: 20px;">Q3: Expand</h3><div class="timeline-dot"></div><p style="font-size: 15px;">• <strong>eHockey Beta Launch</strong><br>• Gaps for eCricket<br>• Audit Portfolio Health</p></div>
             </div>
         </div>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">11 / 13</div>
 </div>
 
+<!-- SLIDE 12: 5. Roadmap — Gates -->
 <div class="slide-container">
-    <h2 class="slide-title">5. Milestones & Go / No-Go</h2>
+    <h2 class="slide-title">5. Roadmap</h2>
+    <p class="slide-subtitle">Milestones &amp; Go / No-Go</p>
     <div class="content-area">
         <table>
-            <thead>
-                <tr>
-                    <th>Checkpoint</th>
-                    <th>Metric</th>
-                    <th>Action Gate</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Checkpoint</th><th>Metric</th><th>Action Gate</th></tr></thead>
             <tbody>
-                <tr>
-                    <td><strong>End of Q1:</strong> Shield Live</td>
-                    <td>Sharp ROI reduction > 20%</td>
-                    <td><span class="badge">GO</span> Proceed to Q2.</td>
-                </tr>
-                <tr>
-                    <td><strong>End of Q2:</strong> Core Quality</td>
-                    <td>Margins within 1% of target</td>
-                    <td><span class="badge">GO</span> Build Vertical.</td>
-                </tr>
-                <tr>
-                    <td><strong>End of Q3:</strong> eHockey Launch</td>
-                    <td>Margin stability confirmed</td>
-                    <td><span class="badge">GO</span> Full market rollout.</td>
-                </tr>
+                <tr><td><strong>End of Q1:</strong> Shield Live</td><td>Sharp ROI reduction > 20%</td><td><span class="badge">GO</span> Proceed to Q2.</td></tr>
+                <tr><td><strong>End of Q2:</strong> Core Quality</td><td>Margins within 1% of target</td><td><span class="badge">GO</span> Build Vertical.</td></tr>
+                <tr><td><strong>End of Q3:</strong> eHockey Launch</td><td>Margin stability confirmed</td><td><span class="badge">GO</span> Full market rollout.</td></tr>
             </tbody>
         </table>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">12 / 13</div>
 </div>
 
+<!-- SLIDE 13: AI Usage -->
 <div class="slide-container">
-    <h2 class="slide-title">AI Preparation & Judgment</h2>
+    <h2 class="slide-title">AI Preparation &amp; Judgment</h2>
     <div class="content-area">
         <table style="font-size: 14px;">
-            <thead>
-                <tr>
-                    <th style="width: 22%; padding: 10px 15px;">Job to be Done</th>
-                    <th style="width: 22%; padding: 10px 15px;">Tool</th>
-                    <th style="width: 56%; padding: 10px 15px;">Where My Judgment Overrode AI</th>
-                </tr>
-            </thead>
+            <thead><tr><th style="width: 22%; padding: 10px 15px;">Job to be Done</th><th style="width: 22%; padding: 10px 15px;">Tool</th><th style="width: 56%; padding: 10px 15px;">Where My Judgment Overrode AI</th></tr></thead>
             <tbody>
-                <tr>
-                    <td style="padding: 10px 15px;"><strong>Market research</strong></td>
-                    <td style="padding: 10px 15px;">Gemini Deep Research</td>
-                    <td style="padding: 10px 15px;">AI compiled data on eBB, eHockey, eFighting. I selected the facts that shaped the diagnosis — DDA, pair playing, frame-data risk.</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px 15px;"><strong>Prototype: Sharp Radar</strong></td>
-                    <td style="padding: 10px 15px;">Gemini Code</td>
-                    <td style="padding: 10px 15px;">AI built the working HTML prototype. The concept of a PM-built triage layer was mine.</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px 15px;"><strong>Presentation design</strong></td>
-                    <td style="padding: 10px 15px;">Gemini Pro</td>
-                    <td style="padding: 10px 15px;">AI generated slide structure and Oddin styling. I edited content, flow, and what to cut.</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px 15px;"><strong>Framework stress-test</strong></td>
-                    <td style="padding: 10px 15px;">Claude Opus</td>
-                    <td style="padding: 10px 15px;">AI red-teamed ICE+CoD and deepen-vs-expand. The conditional-gate framing and CoD twist are mine.</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px 15px;"><strong>Supporting materials</strong></td>
-                    <td style="padding: 10px 15px;">Claude (computer use)</td>
-                    <td style="padding: 10px 15px;">AI produced drafts and converted formats. Voice, structure, all recommendations are mine.</td>
-                </tr>
+                <tr><td style="padding: 10px 15px;"><strong>Market research</strong></td><td style="padding: 10px 15px;">Gemini Deep Research</td><td style="padding: 10px 15px;">AI compiled data on eBB, eHockey, eFighting. I selected the facts that shaped the diagnosis — DDA, pair playing, frame-data risk.</td></tr>
+                <tr><td style="padding: 10px 15px;"><strong>Hybrid Exchange Algorithm</strong></td><td style="padding: 10px 15px;">My concept</td><td style="padding: 10px 15px;">The exchange-based triage layer with toxicity weighting is entirely my idea. AI helped refine the implementation logic, not the concept.</td></tr>
+                <tr><td style="padding: 10px 15px;"><strong>Sharp Radar Prototype</strong></td><td style="padding: 10px 15px;">My concept + Gemini Code</td><td style="padding: 10px 15px;">I designed the product concept and UX. Gemini Code built the working HTML. The idea of a PM-built tool that protects capital without consuming Math bandwidth is mine.</td></tr>
+                <tr><td style="padding: 10px 15px;"><strong>Prioritisation framework</strong></td><td style="padding: 10px 15px;">Claude Opus</td><td style="padding: 10px 15px;">AI suggested extending RICE to ICE (adding exploit/credibility dimensions). I added Cost of Delay as the extra measure — the weekly capital bleed that makes inaction quantifiable.</td></tr>
+                <tr><td style="padding: 10px 15px;"><strong>Presentation + materials</strong></td><td style="padding: 10px 15px;">Gemini Pro + Claude</td><td style="padding: 10px 15px;">AI generated slide structure, styling, drafts and format conversion. I edited content, flow, and all recommendations.</td></tr>
             </tbody>
         </table>
         <div style="margin-top: 15px; background: var(--oddin-black); color: white; padding: 12px 18px; border-radius: 6px; border-left: 6px solid var(--oddin-yellow); font-size: 14px; line-height: 1.4;">
-            <strong style="color: var(--oddin-yellow);">Point of view:</strong> AI suggested immediate math fixes for all titles. I overrode this to prioritize the PM-built Algorithmic Shield first — protecting capital without draining Math bandwidth. AI produces drafts; it does not make judgment calls about people, stakeholders, or trade-offs.
+            <strong style="color: var(--oddin-yellow);">Point of view:</strong> AI suggested immediate math fixes for all titles. I overrode this with the Hybrid Exchange concept — a PM-built algorithmic shield that protects capital instantly without draining Math bandwidth. AI produces drafts and suggests frameworks; it does not make judgment calls about people, stakeholders, or product strategy.
         </div>
     </div>
-    <div class="logo-box"><img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin"></div>
-    <div class="slide-number">13 / 13</div>
 </div>
 
 </body>
 </html>
 
+<script>
+document.querySelectorAll('.slide-container').forEach(slide => {
+    const logo = document.createElement('div');
+    logo.className = 'logo-box';
+    logo.innerHTML = '<img src="Resources/oddin_logo.svg" alt="Oddin">';
+    slide.appendChild(logo);
+});
+</script>
+
+<script>
+const slides = document.querySelectorAll('.slide-container');
+const total = slides.length;
+slides.forEach((slide, i) => {
+    // Add logo
+    const logo = document.createElement('div');
+    logo.className = 'logo-box';
+    logo.innerHTML = '<img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin">';
+    slide.appendChild(logo);
+    // Add slide number
+    const num = document.createElement('div');
+    num.className = 'slide-number';
+    num.textContent = `${i + 1} / ${total}`;
+    slide.appendChild(num);
+});
+</script>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior PM eSims - Assignment | Jesús Lancianese</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --oddin-yellow: #FFCC00;
+            --oddin-black: #0A0A0A;
+            --oddin-dark: #111111;
+            --bg-page: #F4F4F4;
+            --text-muted: #6B7280;
+            --border: #E5E7EB;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-page);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* ── Header block ── */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--oddin-black);
+            padding: 14px 28px;
+            border-radius: 8px;
+            border-bottom: 3px solid var(--oddin-yellow);
+            margin-bottom: 36px;
+        }
+
+        .logo-bar img {
+            height: 24px;
+        }
+
+        .logo-bar span {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--oddin-black);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .header h1 span {
+            color: var(--oddin-yellow);
+            background: var(--oddin-black);
+            padding: 2px 12px;
+            border-radius: 4px;
+        }
+
+        .header .subtitle {
+            font-size: 20px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .header .subtitle strong {
+            color: var(--oddin-black);
+        }
+
+        /* ── Card grid ── */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--oddin-yellow);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--oddin-yellow);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            background: var(--oddin-black);
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-icon i {
+            font-size: 48px;
+            color: var(--oddin-yellow);
+        }
+
+        .card-body {
+            padding: 28px;
+        }
+
+        .card-body .badge {
+            display: inline-block;
+            background: var(--oddin-yellow);
+            color: var(--oddin-black);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .card-body h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--oddin-black);
+            margin-bottom: 10px;
+        }
+
+        .card-body p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .card-cta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--oddin-black);
+            transition: gap 0.2s ease;
+        }
+
+        .card:hover .card-cta {
+            gap: 14px;
+            color: var(--oddin-yellow);
+        }
+
+        .card:hover .card-cta i {
+            color: var(--oddin-yellow);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo-bar">
+            <img src="Resources/oddin_logo.svg" alt="Oddin.gg">
+            <span>Oddin.gg</span>
+        </div>
+        <h1>Senior PM <span>eSims</span> — Assignment</h1>
+        <p class="subtitle">Candidate: <strong>Jesús Lancianese</strong></p>
+    </div>
+
+    <div class="cards">
+
+        <a class="card" href="assingment_slides.html">
+            <div class="card-icon">
+                <i class="fa-solid fa-display"></i>
+            </div>
+            <div class="card-body">
+                <div class="badge">Main Deliverable</div>
+                <h3>Assignment Slides</h3>
+                <p>Diagnosis, prioritisation, stakeholder alignment, roadmap, and AI usage — 12 slides covering all 5 assignment questions.</p>
+                <div class="card-cta">
+                    View presentation <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+
+        <a class="card" href="eSims_Sharp_Radar_wireframes_v2.html">
+            <div class="card-icon">
+                <i class="fa-solid fa-satellite-dish"></i>
+            </div>
+            <div class="card-body">
+                <div class="badge">AI Prototype</div>
+                <h3>eSims Sharp Radar</h3>
+                <p>Working prototype of the PM-built triage tool. Real-time sharp detection, imbalance index, and studio notification — built with Gemini Code.</p>
+                <div class="card-cta">
+                    Launch prototype <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+
+        <a class="card" href="Tool_Ptototype_slides_v2.html">
+            <div class="card-icon">
+                <i class="fa-solid fa-gears"></i>
+            </div>
+            <div class="card-body">
+                <div class="badge">Appendix</div>
+                <h3>Hybrid Exchange Appendix</h3>
+                <p>Deep dive into the Hybrid Exchange Engine concept — toxicity weighting, reaction time comparison, imbalance index, and studio integration.</p>
+                <div class="card-cta">
+                    View appendix <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="footer">
+        Prepared with Claude Opus, Gemini Deep Research, Gemini Code & Gemini Pro — May 2026
+    </div>
+
+</body>
+</html>
