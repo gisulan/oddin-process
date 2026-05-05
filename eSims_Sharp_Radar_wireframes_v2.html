@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oddin.gg - eSims Sharp Radar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            /* Updated Oddin Colors: Yellow, Black, White */
+            --oddin-yellow: #FFD500;
+            --oddin-yellow-hover: #E6C000;
+            --oddin-black: #0A0A0A;
+            --oddin-slate: #475569;
+            --oddin-light: #F8FAFC;
+            --bg-main: #F1F5F9;
+            --bg-panel: #FFFFFF;
+            --border: #E2E8F0;
+            --danger-red: #EF4444;
+            --danger-bg: #FEE2E2;
+            --warning-yellow: #F59E0B;
+            --warning-bg: #FEF3C7;
+            --success-green: #10B981;
+            --success-bg: #D1FAE5;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--oddin-black);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Top Navigation - Black Header */
+        .navbar {
+            background-color: var(--oddin-black);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--oddin-yellow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: 0.05em;
+        }
+        
+        .logo img {
+            height: 32px;
+            display: block;
+        }
+
+        .engine-global-status {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-pulse {
+            width: 8px; height: 8px; background-color: var(--oddin-yellow); border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(255, 213, 0, 0.2);
+        }
+
+        /* Metrics Strip */
+        .metrics-strip {
+            display: flex;
+            background-color: var(--bg-panel);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+        }
+
+        .metric-box {
+            padding: 16px 24px;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .metric-label { color: var(--oddin-slate); font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; }
+        .metric-value { font-size: 1.5rem; font-weight: 700; }
+        .negative { color: var(--danger-red); }
+
+        /* Main Content */
+        .main-container {
+            display: flex;
+            flex: 1;
+            padding: 24px;
+            gap: 24px;
+            overflow: hidden;
+        }
+
+        .panel {
+            background-color: var(--bg-panel);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-panel);
+            color: var(--oddin-black);
+        }
+
+        .panel-content {
+            padding: 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        /* Left Column: Live Alerts */
+        .col-left { width: 300px; flex-shrink: 0; }
+        
+        .alert-feed { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+        
+        .alert-card {
+            background-color: var(--oddin-light);
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            position: relative;
+        }
+        
+        .alert-card.critical {
+            background-color: var(--danger-bg);
+            border-color: #FCA5A5;
+        }
+        
+        .alert-header { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--oddin-slate); font-size: 0.75rem; font-weight: 600;}
+        .alert-reason { margin-top: 10px; font-weight: 700; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 4px; background: white; border: 1px solid var(--border); }
+
+        /* Badges */
+        .badge { padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+        .badge-danger { background: var(--danger-bg); color: #B91C1C; }
+        .badge-warning { background: var(--warning-bg); color: #B45309; }
+        .badge-success { background: var(--success-bg); color: #047857; }
+        .badge-yellow { background: var(--oddin-yellow); color: var(--oddin-black); }
+
+        /* Center Column: Table */
+        .col-center { flex: 1; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { background-color: var(--oddin-light); padding: 12px 20px; font-size: 0.75rem; text-transform: uppercase; color: var(--oddin-slate); font-weight: 700; border-bottom: 1px solid var(--border); }
+        td { padding: 16px 20px; border-bottom: 1px solid var(--border); font-size: 0.9rem; vertical-align: middle; }
+        tr:hover { background-color: var(--oddin-light); }
+        
+        .btn-investigate {
+            background-color: white;
+            color: var(--oddin-black);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-investigate:hover { background-color: var(--bg-main); border-color: var(--oddin-slate); }
+
+        /* Imbalance Bar */
+        .imb-container { width: 100%; height: 8px; background-color: var(--border); border-radius: 4px; overflow: hidden; margin-top: 4px; }
+        .imb-fill { height: 100%; border-radius: 4px; }
+        .imb-high { background-color: var(--danger-red); width: 95%; }
+        .imb-med { background-color: var(--warning-yellow); width: 65%; }
+        .imb-low { background-color: var(--success-green); width: 25%; }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(4px);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-overlay.active { display: flex; }
+        
+        .modal-content {
+            background-color: var(--bg-panel); width: 900px; border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); display: flex; flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 20px 24px; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center; background: var(--bg-panel);
+        }
+        .modal-header h2 { margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--oddin-black); }
+
+        /* Engine Status Banner inside Modal - Black & Yellow */
+        .engine-banner {
+            background-color: var(--oddin-black); color: white; padding: 12px 24px;
+            font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--oddin-yellow);
+        }
+        .engine-banner strong { color: var(--oddin-yellow); }
+
+        .modal-body { padding: 24px; background-color: var(--bg-main); }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+        .card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+        .card-title { font-size: 0.75rem; font-weight: 700; color: var(--oddin-slate); text-transform: uppercase; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px;}
+
+        /* Behavioral Table */
+        .behav-table { width: 100%; font-size: 0.85rem; }
+        .behav-table td { padding: 8px 0; border-bottom: 1px solid var(--bg-main); }
+        .behav-table td:last-child { text-align: right; font-weight: 600; color: var(--oddin-black); }
+
+        /* Primary Button - Oddin Yellow */
+        .btn-primary { 
+            background-color: var(--oddin-yellow); 
+            color: var(--oddin-black); 
+            border: none; 
+            padding: 10px 16px; 
+            border-radius: 6px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 0.9rem; 
+            transition: background 0.2s; 
+        }
+        .btn-primary:hover { background-color: var(--oddin-yellow-hover); }
+        
+        .btn-danger-outline { background: transparent; color: var(--danger-red); border: 1px solid var(--danger-red); padding: 10px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; width: 100%; margin-bottom: 10px; }
+        .btn-danger-outline:hover { background: var(--danger-bg); }
+
+        textarea { width: 100%; background: var(--oddin-light); border: 1px solid var(--border); padding: 12px; border-radius: 6px; font-family: inherit; font-size: 0.85rem; resize: none; margin-bottom: 12px; box-sizing: border-box; color: var(--oddin-black); }
+        select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 12px; font-family: inherit; color: var(--oddin-black); font-weight: 500;}
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin.gg Logo">
+            <span>| eSims Sharp Radar</span>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: center;">
+            <div class="engine-global-status">
+                <div class="status-pulse"></div> HYBRID ENGINE: ACTIVE
+            </div>
+            <div style="color: #A0AABF; font-size: 0.85rem; border-left: 1px solid rgba(255,255,255,0.2); padding-left: 16px;">
+                User: Trading Admin
+            </div>
+        </div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="metrics-strip">
+        <div class="metric-box">
+            <span class="metric-label">Total Sharp Vol (1h)</span>
+            <span class="metric-value">$68,450</span>
+        </div>
+        <div class="metric-box">
+            <span class="metric-label">Live Liability</span>
+            <span class="metric-value negative">-$17,700</span>
+        </div>
+        <div class="metric-box">
+            <span class="metric-label">Auto-Crush Events</span>
+            <span class="metric-value" style="color: var(--warning-yellow);">14</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        
+        <!-- Left: Alerts -->
+        <div class="panel col-left">
+            <div class="panel-header">Live Behavioral Feed</div>
+            <div class="panel-content alert-feed">
+                
+                <div class="alert-card critical">
+                    <div class="alert-header"><span>⚽ eFootball</span><span>Just now</span></div>
+                    <div>Account <strong>#7782A</strong> bet $1,250 on <strong>Tekkz > Tom</strong></div>
+                    <div class="alert-reason" style="color: #B91C1C; border-color: #FCA5A5;">
+                        <i class="fa-solid fa-bolt"></i> 0.4s Steam Chase
+                    </div>
+                </div>
+
+                <div class="alert-card">
+                    <div class="alert-header"><span>🏀 eBasketball</span><span>2 min ago</span></div>
+                    <div>Account <strong>#991B</strong> bet $250.00 on <strong>Mamba > ShooterX</strong></div>
+                    <div class="alert-reason" style="color: #B45309;">
+                        <i class="fa-solid fa-crosshairs"></i> Max Limit Snipe
+                    </div>
+                </div>
+
+                <div class="alert-card">
+                    <div class="alert-header"><span>⚽ eFootball</span><span>5 min ago</span></div>
+                    <div>Multiple (5) accounts hitting <strong>CR7_Pro</strong> spread.</div>
+                    <div class="alert-reason" style="color: #047857;">
+                        <i class="fa-solid fa-users"></i> Swarm Detected
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Center: Pairs Table -->
+        <div class="panel col-center">
+            <div class="panel-header">
+                Top Exploited Pairs
+                <button class="btn-investigate" style="font-size: 0.75rem;"><i class="fa-solid fa-filter"></i> Filter</button>
+            </div>
+            <div class="panel-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pairing</th>
+                            <th>Current Odds</th>
+                            <th>Liability</th>
+                            <th>Imbalance</th>
+                            <th>Engine Status</th>
+                            <th>Primary Reason</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>⚽ Tekkz vs. Tom</strong></td>
+                            <td style="font-family: monospace; font-size: 1rem; color: var(--oddin-slate); font-weight: 600;">1.05 / 8.50</td>
+                            <td class="negative font-bold" style="font-weight: 700;">-$12.4k</td>
+                            <td>
+                                <div style="font-weight: 600;">9.5 / 10</div>
+                                <div class="imb-container"><div class="imb-fill imb-high"></div></div>
+                            </td>
+                            <td><span class="badge badge-danger">Auto-Crushing</span></td>
+                            <td><span class="badge badge-danger"><i class="fa-solid fa-bolt"></i> Steam Chase</span></td>
+                            <td><button class="btn-investigate" onclick="openModal()">Investigate</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>🏀 Mamba vs. ShooterX</strong></td>
+                            <td style="font-family: monospace; font-size: 1rem; color: var(--oddin-slate); font-weight: 600;">1.65 / 2.20</td>
+                            <td class="negative" style="font-weight: 700;">-$4.2k</td>
+                            <td>
+                                <div style="font-weight: 600;">7.0 / 10</div>
+                                <div class="imb-container"><div class="imb-fill imb-med"></div></div>
+                            </td>
+                            <td><span class="badge badge-warning">Adjusting</span></td>
+                            <td><span class="badge badge-warning"><i class="fa-solid fa-crosshairs"></i> Max Limit Hit</span></td>
+                            <td><button class="btn-investigate" onclick="openModal()">Investigate</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>⚽ CR7_Pro vs. MessiFan</strong></td>
+                            <td style="font-family: monospace; font-size: 1rem; color: var(--oddin-slate); font-weight: 600;">1.85 / 1.95</td>
+                            <td style="font-weight: 700;">-$1.1k</td>
+                            <td>
+                                <div style="font-weight: 600;">3.0 / 10</div>
+                                <div class="imb-container"><div class="imb-fill imb-low"></div></div>
+                            </td>
+                            <td><span class="badge badge-success">Balanced</span></td>
+                            <td><span class="badge badge-success"><i class="fa-solid fa-users"></i> Swarm (Low)</span></td>
+                            <td><button class="btn-investigate" onclick="openModal()">Investigate</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Investigation Modal -->
+    <div class="modal-overlay" id="drilldownModal">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h2>⚽ Matchup Investigation: Tekkz vs. Tom</h2>
+                <button style="background: none; border: none; font-size: 1.5rem; color: var(--oddin-slate); cursor: pointer;" onclick="closeModal()">&times;</button>
+            </div>
+
+            <!-- Hybrid Engine Banner - Oddin Branded -->
+            <div class="engine-banner">
+                <div><i class="fa-solid fa-shield-halved"></i> <strong>HYBRID ENGINE: ACTIVE</strong></div>
+                <div>TOXICITY MULTIPLIER: <strong style="background: var(--oddin-yellow); color: var(--oddin-black); padding: 2px 6px; border-radius: 4px; margin-left: 4px;">10x</strong></div>
+                <div style="background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 4px;">Status: <strong>Auto-Crushing Tekkz Odds</strong></div>
+            </div>
+            
+            <div class="modal-body">
+                
+                <div class="grid-2">
+                    <!-- Financials -->
+                    <div class="card">
+                        <div class="card-title">Market Imbalance</div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.9rem;">
+                            <span style="color: var(--oddin-slate); font-weight: 600;">Total Liability:</span>
+                            <span class="negative" style="font-weight: 700; font-size: 1.1rem;">-$12,450</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.8rem;">
+                            <span class="negative" style="font-weight: 700;">85% Sharp Volume</span>
+                            <span style="color: var(--success-green); font-weight: 700;">15% Public</span>
+                        </div>
+                        <div class="imb-container" style="height: 12px;"><div class="imb-fill imb-high" style="width: 85%;"></div></div>
+                        <div style="margin-top: 16px; padding: 12px; background: var(--oddin-light); border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; color: var(--oddin-black);">
+                            <strong>Current Price Reality:</strong> The engine is defending the book by crushing Tekkz to 1.05. Market is currently unplayable for recreational users.
+                        </div>
+                    </div>
+
+                    <!-- Telemetry -->
+                    <div class="card">
+                        <div class="card-title">Real-Time Behavioral Telemetry (Top Threat)</div>
+                        <table class="behav-table">
+                            <tbody>
+                                <tr><td>Primary Threat Account:</td><td><span class="badge badge-danger">#7782A</span></td></tr>
+                                <tr><td>Avg. Dwell Time:</td><td>0.8 Seconds</td></tr>
+                                <tr><td>Navigational Path:</td><td>Direct API / Scraper</td></tr>
+                                <tr><td>Bet Placed After Line Move:</td><td>0.4s Latency</td></tr>
+                                <tr><td>Engine Weight Applied:</td><td style="color: var(--danger-red);">10x ($12,500 equivalent)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="grid-2" style="margin-bottom: 0;">
+                    <div class="card" style="border-color: #FCA5A5;">
+                        <div class="card-title" style="color: var(--danger-red);">Emergency Trading Actions</div>
+                        <button class="btn-danger-outline" onclick="alert('Market Suspended!')"><i class="fa-solid fa-pause"></i> SUSPEND MARKET</button>
+                        <button class="btn-danger-outline" style="border-color: var(--warning-yellow); color: #B45309;" onclick="alert('Limits throttled.')"><i class="fa-solid fa-down-left-and-up-right-to-center"></i> THROTTLE MAX LIMITS</button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Studio Communication (Root Cause Fix)</div>
+                        <select>
+                            <option>Route to: ⚽ eFootball Studio 1</option>
+                        </select>
+                        <textarea rows="3">Urgent: Requesting immediate rotation for Tekkz vs Tom. Sharp imbalance detected (Fatigue/Tilt suspected). Market is unplayable.</textarea>
+                        <button class="btn-primary" onclick="alert('Rotation Request sent to Studio API.')"><i class="fa-solid fa-paper-plane"></i> SEND ROTATION REQUEST</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('drilldownModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('drilldownModal').classList.remove('active');
+        }
+
+        // Close on outside click
+        window.onclick = function(event) {
+            let modal = document.getElementById('drilldownModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
