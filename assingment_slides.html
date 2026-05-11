@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Oddin.gg eSims Strategy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-/* 1. CORE BRAND SETUP */
+/* 1. CORE BRAND SETUP & BASE ENGINE */
 :root {
   --oddin-yellow: #FFCC00;
   --oddin-black: #000000;
@@ -21,23 +21,25 @@
 }
 
 * { box-sizing: border-box; }
+
 body {
   background-color: #D1D5DB;
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 1fr;
   margin: 0;
+  padding: 0;
   min-height: 100vh;
-  padding: 70px 0 20px;
-  place-items: center;
+  min-height: -webkit-fill-available;
+  overflow: hidden; 
+  touch-action: none; /* Prevents pull-to-refresh on mobile */
 }
+
+html { height: -webkit-fill-available; }
 
 .page-topbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,32 +57,33 @@ body {
   font-weight: 700;
 }
 
-.page-topbar .page-return {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.95rem;
-}
+.page-topbar .page-return { display: inline-flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+.page-topbar .page-name { font-size: 0.92rem; color: #D1D5DB; }
 
-.page-topbar .page-name {
-  font-size: 0.92rem;
-  color: #D1D5DB;
-}
-
+/* 2. SLIDE CONTAINER (Presentation Engine) */
 .slide-container {
-  align-items: center;
-  background-color: var(--bg-light);
-  border-radius: 4px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  font-family: 'DM Sans', sans-serif;
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1280px; 
   height: 720px;
-  justify-content: center;
+  margin: 0 auto;
+  padding: 50px 80px 100px 80px;
   overflow: hidden;
-  padding: 50px 80px 100px 80px; /* Safe zone for footer elements */
-  position: relative;
-  width: 1280px;
+  transform: translate(-50%, -50%);
+  transform-origin: center center; 
+  background-color: var(--bg-light);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  font-family: 'DM Sans', sans-serif;
+  border-radius: 4px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slide-container.active {
+  display: flex;
 }
 
 /* ODDIN ACCENT LINE */
@@ -95,7 +98,7 @@ body {
   z-index: 2;
 }
 
-/* SLIDE NUMBERING - BOTTOM RIGHT (YELLOW) */
+/* DYNAMIC INJECTIONS: Slide Number & Logo */
 .slide-number {
   position: absolute;
   bottom: 30px;
@@ -106,7 +109,6 @@ body {
   z-index: 10;
 }
 
-/* LOGO BOX - BOTTOM LEFT */
 .logo-box {
   position: absolute;
   bottom: 25px;
@@ -121,137 +123,88 @@ body {
 }
 .logo-box img { height: 16px; }
 
-/* 2. TYPOGRAPHY */
-.slide-container h1, .slide-container h2, .slide-container h3, .slide-container h4 {
-  color: var(--oddin-black);
-  font-weight: 700;
-  margin: 0;
-}
-.slide-container p, .slide-container li, .slide-container td {
-  color: var(--text-main);
-  font-size: 19px;
-  line-height: 1.4;
-}
-.slide-container .slide-title {
-  font-size: 34px;
-  margin-bottom: 30px;
-  text-align: left;
-  width: 100%;
-  border-bottom: 2px solid var(--oddin-yellow);
-  padding-bottom: 8px;
-}
+/* 3. TYPOGRAPHY */
+.slide-container h1, .slide-container h2, .slide-container h3, .slide-container h4 { color: var(--oddin-black); font-weight: 700; margin: 0; }
+.slide-container p, .slide-container li, .slide-container td { color: var(--text-main); font-size: 19px; line-height: 1.4; }
+.slide-container .slide-title { font-size: 34px; margin-bottom: 30px; text-align: left; width: 100%; border-bottom: 2px solid var(--oddin-yellow); padding-bottom: 8px; }
+.slide-subtitle { font-size: 18px; color: var(--text-muted); font-weight: 500; margin-top: -22px; margin-bottom: 25px; text-align: left; width: 100%; }
 
-/* 3. LAYOUT COMPONENTS */
-.content-area {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: center;
-  width: 100%;
-}
+/* DARK THEME OVERRIDE FOR TITLE */
+.title-slide { background-color: var(--oddin-black) !important; color: white !important; }
+.title-slide .content-area { align-items: center; text-align: center; }
+.title-slide .slide-title { border: none; font-size: 64px; text-align: center; color: white; margin-bottom: 10px; }
+.title-slide p.subtitle { font-size: 22px; color: #9CA3AF; text-align: center; margin-top: 0; }
 
-.two-column {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  width: 100%;
-}
-
-.three-column {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  width: 100%;
-}
-
-.card {
-  background-color: var(--bg-off);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  padding: 25px;
-  width: 100%;
-}
+/* 4. LAYOUT COMPONENTS */
+.content-area { align-items: flex-start; display: flex; flex-direction: column; flex-grow: 1; justify-content: center; width: 100%; }
+.two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; }
+.three-column { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; width: 100%; }
+.card { background-color: var(--bg-off); border-radius: 8px; border: 1px solid var(--border); padding: 25px; width: 100%; }
 .card.accent { border-left: 6px solid var(--oddin-yellow); }
+.icon-box { background: var(--oddin-black); color: var(--oddin-yellow); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 20px; border-radius: 6px; margin-bottom: 15px; }
 
-.icon-box {
-  background: var(--oddin-black);
-  color: var(--oddin-yellow);
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  border-radius: 6px;
-  margin-bottom: 15px;
-}
-
-/* 4. TABLES & TIMELINES */
+/* 5. TABLES & TIMELINES */
 table { width: 100%; border-collapse: collapse; }
-th {
-  background: var(--oddin-black) !important;
-  color: #FFFFFF !important;
-  padding: 15px;
-  text-align: left;
-  font-size: 15px;
-  border-bottom: 3px solid var(--oddin-yellow);
-}
+th { background: var(--oddin-black) !important; color: #FFFFFF !important; padding: 15px; text-align: left; font-size: 15px; border-bottom: 3px solid var(--oddin-yellow); }
 td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
-.badge {
-  background: var(--oddin-yellow);
-  color: var(--oddin-black);
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-weight: 700;
-  font-size: 11px;
-}
+.badge { background: var(--oddin-yellow); color: var(--oddin-black); padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 11px; }
 
 .timeline-container { width: 100%; position: relative; padding-top: 10px; }
-.timeline-line { 
-    position: absolute; 
-    top: 94px; /* ALIGNED WITH DOTS */
-    left: 5%; 
-    width: 90%; 
-    height: 4px; 
-    background: var(--oddin-black); 
-    z-index: 1; 
-}
+.timeline-line { position: absolute; top: 94px; left: 5%; width: 90%; height: 4px; background: var(--oddin-black); z-index: 1; }
 .timeline-row { display: flex; justify-content: space-between; width: 100%; position: relative; z-index: 2; }
 .timeline-item { width: 22%; text-align: center; }
 .timeline-dot { width: 20px; height: 20px; background: var(--oddin-yellow); border-radius: 50%; border: 4px solid #fff; margin: 50px auto 25px; }
 
-/* 5. TACTICAL VISUALS */
+/* 6. TACTICAL VISUALS */
 .weight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; }
 .weight-card { text-align: center; padding: 20px; border: 1px solid var(--border); border-radius: 8px; }
 .weight-card .factor { font-size: 42px; font-weight: 700; margin: 5px 0; }
 .weight-card.highlight { background: var(--oddin-black); color: #fff; border-color: var(--oddin-yellow); }
 .weight-card.highlight .factor { color: var(--oddin-yellow); }
 
-.radar-ui {
-  background: #0F172A;
-  border-radius: 12px;
-  padding: 20px;
-  color: white;
-  width: 100%;
-  font-family: monospace;
-  border: 1px solid #334155;
-}
-.radar-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: 10px 0;
-  border-bottom: 1px solid #1E293B;
-  font-size: 13px;
+/* --- PRINT/DOWNLOAD BUTTON --- */
+.print-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: var(--oddin-black);
+    color: var(--oddin-yellow);
+    border: 2px solid var(--oddin-yellow);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* DARK THEME OVERRIDE FOR TITLE */
-.title-slide { background-color: var(--oddin-black) !important; color: white !important; }
-.title-slide .content-area { align-items: center; text-align: center; }
-.title-slide .slide-title { border: none; font-size: 64px; text-align: center; color: white; margin-bottom: 10px; }
-.title-slide p.subtitle { font-size: 22px; color: #9CA3AF; text-align: center; }
-.slide-subtitle { font-size: 18px; color: var(--text-muted); font-weight: 500; margin-top: -22px; margin-bottom: 25px; text-align: left; width: 100%; }
+.print-button:hover { background-color: #222; transform: scale(1.1); }
 
+@media print {
+    @page { size: landscape; margin: 0; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .slide-container {
+        display: flex !important;
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        margin-bottom: 0 !important;
+        box-shadow: none !important;
+        page-break-after: always;
+        break-after: page;
+        width: 100% !important; 
+        height: auto !important;
+        min-height: 720px;
+    }
+    body { background: white !important; overflow: visible !important; display: block !important; padding-top: 0; }
+    .page-topbar, .print-button { display: none !important; }
+}
     </style>
 </head>
 <body>
@@ -261,7 +214,10 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     <div class="page-name">Assignment Slides</div>
 </div>
 
-<!-- SLIDE 1: Title -->
+<button class="print-button" onclick="window.print()" title="Save as PDF">
+    <i class="fa-solid fa-download"></i>
+</button>
+
 <div class="slide-container title-slide">
     <div class="content-area">
         <img src="Resources/oddin_logo.svg" alt="Oddin Logo" style="width: 280px; margin-bottom: 40px;">
@@ -271,7 +227,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 2: 1. Diagnosis — Framing -->
 <div class="slide-container">
     <h2 class="slide-title">1. Diagnosis</h2>
     <p class="slide-subtitle">Framing the Problem</p>
@@ -293,7 +248,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 3: 1. Diagnosis — Day One Data Requests -->
 <div class="slide-container">
     <h2 class="slide-title">1. Diagnosis</h2>
     <p class="slide-subtitle">Day One Collaborative Request</p>
@@ -319,7 +273,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 4: 1. Diagnosis — Hybrid Engine -->
 <div class="slide-container">
     <h2 class="slide-title">1. Diagnosis</h2>
     <p class="slide-subtitle">Q1 Triage: Hybrid Exchange Engine</p>
@@ -336,7 +289,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 5: 1. Diagnosis — Sharp Radar -->
 <div class="slide-container">
     <h2 class="slide-title">1. Diagnosis</h2>
     <p class="slide-subtitle">MVP: Sharp Radar &amp; Studio Notify</p>
@@ -357,7 +309,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 6: 1. Diagnosis — Reaction Time -->
 <div class="slide-container">
     <h2 class="slide-title">1. Diagnosis</h2>
     <p class="slide-subtitle">Why P0: Reaction Time Kills Latency Arbitrage</p>
@@ -373,7 +324,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 7: 2. Prioritisation — Framework -->
 <div class="slide-container">
     <h2 class="slide-title">2. Prioritisation</h2>
     <p class="slide-subtitle">ICE + Cost of Delay (CoD) Framework</p>
@@ -392,7 +342,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 8: 2. Prioritisation — Matrix -->
 <div class="slide-container">
     <h2 class="slide-title">2. Prioritisation</h2>
     <p class="slide-subtitle">Strategic Priority Matrix</p>
@@ -409,7 +358,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 9: 3. Working with Mathematicians -->
 <div class="slide-container">
     <h2 class="slide-title">3. Working with Mathematicians</h2>
     <p class="slide-subtitle">How I Lead the Math Team Partnership</p>
@@ -418,28 +366,27 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
             <p style="font-size: 18px; margin: 0;"><strong>My operating principle:</strong> I explain the <em>why</em> and <em>what we want to achieve</em>. I give the team clarity on the goal and full freedom to evaluate the best technical options. But always time-framed — to avoid derailing or analysis paralysis — and always evaluated: what was achieved, what's next.</p>
         </div>
         <div class="two-column" style="gap: 30px;">
-            <div class="card" style="border-top: 4px solid var(--oddin-yellow);"><h3 style="font-size: 20px; margin-bottom: 12px;">What I Bring to the Table</h3>
-                <ul style="font-size: 16px; padding-left: 20px; margin: 0;">
+            <div class="card" style="border-top: 4px solid var(--oddin-yellow);"><h3 style="font-size: 20px; margin-bottom: 10px;">What I Bring to the Table</h3>
+                <ul style="font-size: 14px; padding-left: 20px; margin: 0;">
                     <li style="margin-bottom: 10px;"><strong>The business problem and the outcome:</strong> "eBB margin needs to reach within 1pp of its 6% target" — not "fix the correlation coefficient."</li>
                     <li style="margin-bottom: 10px;"><strong>The constraints:</strong> time, capacity, dependencies. I make the boundaries visible so the team can optimise within them.</li>
                     <li><strong>The evaluation cadence:</strong> 2-week sprint reviews. Every cycle ends with a decision — continue, pivot, or escalate — never just a status update.</li>
                 </ul>
             </div>
-            <div class="card" style="border-top: 4px solid var(--oddin-yellow);"><h3 style="font-size: 20px; margin-bottom: 12px;">What I Protect Them From</h3>
-                <ul style="font-size: 16px; padding-left: 20px; margin: 0;">
+            <div class="card" style="border-top: 4px solid var(--oddin-yellow);"><h3 style="font-size: 20px; margin-bottom: 10px;">What I Protect Them From</h3>
+                <ul style="font-size: 14px; padding-left: 20px; margin: 0;">
                     <li style="margin-bottom: 10px;"><strong>Scope creep from commercial:</strong> no "whipsaw" priorities. The roadmap is the shield.</li>
                     <li style="margin-bottom: 10px;"><strong>Analysis paralysis:</strong> if a sprint produces no measurable gain, we pivot to Trading-led mitigation. No shame — it's data.</li>
                     <li><strong>Working in isolation:</strong> daily partnership with the Eng Lead to unblock infrastructure constraints immediately. I'm in the room, not waiting for a Jira ticket.</li>
                 </ul>
             </div>
         </div>
-        <div style="margin-top: 15px; background: var(--oddin-black); color: white; padding: 12px 20px; border-radius: 6px; text-align: center; font-size: 15px;">
+        <div style="margin-top: 10px; background: var(--oddin-black); color: white; padding: 10px 20px; border-radius: 6px; text-align: center; font-size: 14px;">
             <strong style="color: var(--oddin-yellow);">Sprint 1 asks:</strong>&nbsp; Margin decomposition by title/market/bet-type&nbsp; •&nbsp; P&amp;L concentration (sharps vs. broad)&nbsp; •&nbsp; Top 10 correlation residuals
         </div>
     </div>
 </div>
 
-<!-- SLIDE 10: 4. Deepen vs. Expand -->
 <div class="slide-container">
     <h2 class="slide-title">4. Deepen vs. Expand</h2>
     <p class="slide-subtitle">Stakeholder Alignment</p>
@@ -453,7 +400,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 11: 5. Roadmap — Timeline -->
 <div class="slide-container">
     <h2 class="slide-title">5. Roadmap</h2>
     <p class="slide-subtitle">Phased Roadmap (Q1-Q3)</p>
@@ -468,7 +414,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 12: 5. Roadmap — Gates -->
 <div class="slide-container">
     <h2 class="slide-title">5. Roadmap</h2>
     <p class="slide-subtitle">Milestones &amp; Go / No-Go</p>
@@ -484,7 +429,6 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
-<!-- SLIDE 13: AI Usage -->
 <div class="slide-container">
     <h2 class="slide-title">AI Preparation &amp; Judgment</h2>
     <div class="content-area">
@@ -504,31 +448,140 @@ td { border-bottom: 1px solid var(--border); padding: 15px; font-size: 17px; }
     </div>
 </div>
 
+<script>
+    const slides = document.querySelectorAll('.slide-container');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+
+    // 1. Auto-Inject Repeated Brand Elements (DRY)
+    slides.forEach((slide, i) => {
+        // Logo Box (Don't inject on Title slide if it already has the big logo)
+        if (!slide.classList.contains('title-slide')) {
+            const logo = document.createElement('div');
+            logo.className = 'logo-box';
+            logo.innerHTML = '<img src="Resources/oddin_logo.svg" alt="Oddin Logo">';
+            slide.appendChild(logo);
+        }
+        
+        // Slide Number Footer
+        const num = document.createElement('div');
+        num.className = 'slide-number';
+        num.dataset.index = i + 1; // Used for dynamic updating later if needed
+        slide.appendChild(num);
+    });
+
+    // 2. Responsive Engine
+    function updateScale() {
+        const slide = document.querySelector('.slide-container.active');
+        if (!slide) return;
+
+        // Account for top bar in calculation so slide doesn't overlap it
+        const topBarHeight = document.querySelector('.page-topbar').offsetHeight;
+        const padding = 20; 
+        
+        const screenWidth = window.innerWidth - padding;
+        const screenHeight = window.innerHeight - topBarHeight - padding;
+        
+        const scaleX = screenWidth / 1280;
+        const scaleY = screenHeight / 720;
+        
+        const scale = Math.min(scaleX, scaleY);
+        
+        // Offset slide slightly down to clear topbar
+        slides.forEach(s => {
+            s.style.transform = `translate(-50%, calc(-50% + ${topBarHeight / 2}px)) scale(${scale})`;
+        });
+    }
+
+    // 3. Navigation Logic
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        
+        const activeSlide = slides[index];
+        activeSlide.classList.add('active');
+
+        // Update the numbering element inside the active slide
+        const footer = activeSlide.querySelector('.slide-number');
+        if (footer) {
+            footer.innerText = `${index + 1} / ${totalSlides}`;
+        }
+
+        // Update Hash
+        window.location.hash = index + 1;
+        updateScale();
+    }
+
+    function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+    }
+
+    // 4. Keyboard Controls
+    window.addEventListener('keydown', (e) => {
+        // Stop space/arrows from moving the window down
+        if (['ArrowRight', 'ArrowLeft', ' ', 'Enter'].includes(e.key)) {
+            e.preventDefault(); 
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        }
+    });
+
+    // 5. Mouse Click Controls
+    window.addEventListener('click', (e) => {
+        // Ignore clicks on buttons or links
+        if (e.target.closest('button, a')) return;
+
+        if (e.clientX > window.innerWidth / 2) {
+            nextSlide();
+        } else {
+            prevSlide();
+        }
+    });
+
+    // 6. Mobile Swipe Controls
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    window.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    window.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const swipeThreshold = 50; 
+        if (touchEndX < touchStartX - swipeThreshold) nextSlide(); 
+        if (touchEndX > touchStartX + swipeThreshold) prevSlide(); 
+    }
+
+    window.addEventListener('resize', updateScale);
+
+    // 7. Initialize & Hash Memory
+    function getInitialSlide() {
+        if (window.location.hash) {
+            const hashNum = parseInt(window.location.hash.substring(1));
+            if (!isNaN(hashNum) && hashNum >= 1 && hashNum <= slides.length) {
+                return hashNum - 1; 
+            }
+        }
+        return 0; 
+    }
+
+    currentSlide = getInitialSlide();
+    showSlide(currentSlide);
+
+</script>
 </body>
 </html>
-
-<script>
-document.querySelectorAll('.slide-container').forEach(slide => {
-    const logo = document.createElement('div');
-    logo.className = 'logo-box';
-    logo.innerHTML = '<img src="Resources/oddin_logo.svg" alt="Oddin">';
-    slide.appendChild(logo);
-});
-</script>
-
-<script>
-const slides = document.querySelectorAll('.slide-container');
-const total = slides.length;
-slides.forEach((slide, i) => {
-    // Add logo
-    const logo = document.createElement('div');
-    logo.className = 'logo-box';
-    logo.innerHTML = '<img src="https://oddin.gg/images/oddin_logo.svg" alt="Oddin">';
-    slide.appendChild(logo);
-    // Add slide number
-    const num = document.createElement('div');
-    num.className = 'slide-number';
-    num.textContent = `${i + 1} / ${total}`;
-    slide.appendChild(num);
-});
-</script>
